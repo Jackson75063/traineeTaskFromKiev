@@ -38,10 +38,10 @@ public class UserServiceImpl implements UserService {
 
 //        [a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{1,3}
 
-        if(parametr.equalsIgnoreCase("[a-zA-Z_]+@[a-zA-Z_]+?\\.[a-zA-Z]{1,3}"))
+        /*if(parametr.equalsIgnoreCase("[a-zA-Z_]+@[a-zA-Z_]+?\\.[a-zA-Z]{1,3}"))
             System.out.println("EEEEEEEEEEEEEEEEEEEe");
         else
-            System.out.println("NEEEEEEEEEEEEEEEEE");
+            System.out.println("NEEEEEEEEEEEEEEEEE");*/
         user.setEmail(parametr);
         System.out.println("Email : " + user.getEmail());
 

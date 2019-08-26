@@ -1,3 +1,4 @@
+/*
 package com.jackson.writter;
 
 import com.google.gson.Gson;
@@ -68,7 +69,8 @@ public class newMain {
         }
     }
 
-    private static void setUser(String name, String surname, String email, String role, String cellphone) {
+  */
+/*  private static void setUser(String name, String surname, String email, String role, String cellphone) {
         User user = new User();
         user.setName(name);
         user.setSurname(surname);
@@ -85,9 +87,11 @@ public class newMain {
         int user_num = scanner.nextInt();
         user_info(user_num);
     }
+*//*
 
 
-    public static void addFile(List list, User...user) {
+   */
+/* public static void addFile(List list, User...user) {
         try {
             FileOutputStream os = new FileOutputStream("file.json", true);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
@@ -102,11 +106,13 @@ public class newMain {
             ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
+        }*//*
 
-    }
 
-    public static void readFile(String email){
+//    }
+
+    */
+/*public static void readFile(String email){
 
         try {
             JsonReader reader = new JsonReader(new FileReader("file.json"));
@@ -125,6 +131,8 @@ public class newMain {
             ex.printStackTrace();
         }
     }
+*//*
 
 
 }
+*/

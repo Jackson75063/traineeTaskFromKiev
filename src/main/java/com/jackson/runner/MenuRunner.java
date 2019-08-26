@@ -41,8 +41,8 @@ public class MenuRunner {
                 case 1:
                     System.out.println("CASE 1");
                     User u = userService.addUser();
-//                    writeObjToFile.writeToFile(u);
-                    writeObjToFile.test(u);
+                    writeObjToFile.writeToFile(u);
+//                    writeObjToFile.test(u);
                     break;
                 case 2:
                     System.out.println("CASE 2");

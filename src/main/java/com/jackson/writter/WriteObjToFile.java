@@ -1,77 +1,52 @@
 package com.jackson.writter;
 
+//import com.alibaba.fastjson.JSON;
+//import com.alibaba.fastjson.JSON;
+//import com.alibaba.fastjson.JSON;
+
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.JsonArray;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.jackson.model.User;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WriteObjToFile {
 
+    File  f = new File("./test.json");
+    List users = new ArrayList();
 
-    private List<User> listOfStudents = new ArrayList<>();
-//    PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+    public void writeToFile(User u)  {
+        ObjectMapper objectMapper = new ObjectMapper(); // jackson
+        ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
+        try {
+            if(!f.exists()) {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+                System.out.println("CREATED ");
+            }
 
-    BufferedWriter writer =  new BufferedWriter(new FileWriter("./output.txt"));
+            // if file is empty
+            if(f.length() != 0)
+                users = objectMapper.readValue(f, List.class);
 
+//            objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // for good json view
+            users.add(u);
+            writer.writeValue(f, users);
 
-    Path file = Paths.get("the-file-name");
-
- FileWriter fileWriter = new FileWriter("samplefile2.json");
-
+        } catch (Exception ignored){
+        }
+    }
 
 
     public WriteObjToFile() throws IOException {
     }
 
-    public void test(User u){
 
-
-        ObjectMapper objectMapper = new ObjectMapper(); // jackson
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // for good json view
-//        objectMapper.writeValue(writer, new User("lolik123", "lolik123", "lolik123", null, null));
-
-
-        try {
-
-            objectMapper.writeValue(fileWriter,u );
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//        fileWriter.write(fileContent);
-
-
-    }
-
-
-    public void writeToFile(User u) {
-
-        ObjectMapper objectMapper = new ObjectMapper(); // jackson
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // for good json view
-//        objectMapper.writeValue();
-//        Writer writer = new OutputStreamWriter(f);
-        try {
-            writer.write(u.toString()+"lol");
-//            objectMapper.writeValue(writer,u);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<User> getListOfStudents () {
-        return listOfStudents;
-    }
-
-    public void setListOfStudents(List<User> listOfStudents) {
-        this.listOfStudents = listOfStudents;
-    }
 }
-
