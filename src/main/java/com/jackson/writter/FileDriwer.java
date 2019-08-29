@@ -17,11 +17,12 @@ public class FileDriwer {
     private File  file = new File("./test.json");
     private ObjectMapper objectMapper = new ObjectMapper(); // jackson
 
-    public static Map users;
+    public static Map<String,User> users;
     {
-        existedFile();
+        existedFile(file);
+        System.out.println("STATIC");
         users = new HashMap<>();
-        users = objectMapper.readValue(file, Map.class);
+        users = objectMapper.readValue(existedFile(file), Map.class);
     }
 
 
@@ -29,7 +30,7 @@ public class FileDriwer {
     public void writeToFile(User u)  {
         ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
         try {
-            existedFile();
+            existedFile(file);
 
             // if file is empty
             if(file.length() != 0)
@@ -53,6 +54,7 @@ public class FileDriwer {
     }
 
     public FileDriwer() throws IOException {
+        existedFile(file);
     }
 
     public File getFile() {
@@ -72,16 +74,27 @@ public class FileDriwer {
     }
 
     //if file is not exist -
-    private void existedFile(){
+    private File existedFile(File f){
 
-        if(!file.exists()) {
-            file.getParentFile().mkdirs();
+        if(!f.exists()) {
             try {
-                file.createNewFile();
+                f.createNewFile();
+                f.getParentFile().mkdirs();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("CREATED ");
+
         }
+        if(file.length() == 0)
+            try {
+                new FileWriter(f).write("{ }");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        System.out.println("CREATED ");
+
+        return f;
     }
 }

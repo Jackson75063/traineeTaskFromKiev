@@ -1,9 +1,16 @@
 {
-  "xcv" : {
-    "name" : "qwer",
-    "surname" : null,
-    "email" : "xcv",
-    "roles" : null,
-    "phones" : null
+  "q" : {
+    "name" : "q",
+    "surname" : "q",
+    "email" : "q",
+    "roles" : [ "ADMIN" ],
+    "phones" : [ "1" ]
+  },
+  "ww" : {
+    "name" : "w",
+    "surname" : "w",
+    "email" : "ww",
+    "roles" : [ "ADMIN" ],
+    "phones" : [ "44444" ]
   }
 }

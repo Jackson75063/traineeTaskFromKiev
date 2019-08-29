@@ -28,8 +28,7 @@ public class MenuRunner {
 
             System.out.println("PRESS : ");
             System.out.println("1. Add new user");
-            System.out.println("2. Find user by name");
-            System.out.println("3. Edit user by name");
+            System.out.println("3. Edit user by mail");
             System.out.println("4. Delete user by mail");
             System.out.println("5. Print all users");
             Scanner sc = new Scanner(System.in);
@@ -47,9 +46,19 @@ public class MenuRunner {
                     System.out.println("CASE 2");
                     break;
 
+                case 3:
+                    String mail;
+                    System.out.println("Input user mail for changing ");
+                    mail = sc.next();
+                    User user = (User) FileDriwer.users.get(mail);
+                    userService.changeUser(user);
+                    FileDriwer.users.put(user.getEmail(),user);
+                    System.out.println("CHANGED USER");
+                    break;
+
                 case 4:
                     System.out.println("Input mail for deleting : ");
-                    String mail = sc.next();
+                    mail = sc.next();
                     userService.deleteByEmail(mail);
                     System.out.println("DELETED");
                     fileDriwer.rewriteFile(FileDriwer.users);
@@ -61,7 +70,7 @@ public class MenuRunner {
 
 
                     if (FileDriwer.users.size() == 0) {
-                        System.out.println("OOPSSSSS");
+                        System.out.println("There is no one user if file. Add users before user.");
                     }
 
                     FileDriwer.users.forEach((k,v) ->System.out.println(k+" : "+v));

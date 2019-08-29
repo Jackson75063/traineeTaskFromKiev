@@ -10,16 +10,13 @@ import com.jackson.writter.FileDriwer;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class UserServiceImpl implements UserService {
 
 
     private Scanner sc = new Scanner(System.in);
     private FileDriwer fileDriwer = new FileDriwer();
-
 
 
     public User addUser() {
@@ -31,32 +28,33 @@ public class UserServiceImpl implements UserService {
 
 //        List<Roles> role = Arrays.asList(Roles.ADMIN, Roles.GUEST, Roles.THIRD_ROLE);
 
+
         System.out.println("Input name: ");
         String parametr = sc.next();
         user.setName(parametr);
         System.out.println("Name : " + user.getName());
 
 
-        /*
+
         System.out.println("Input surname: ");
         parametr = sc.next();
         user.setSurname(parametr);
-        System.out.println("Surname : " + user.getSurname());*/
+        System.out.println("Surname : " + user.getSurname());
 
         System.out.println("Input Email : ");
         parametr = sc.next();
 
 //        [a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{1,3}
 
-        /*if(parametr.equalsIgnoreCase("[a-zA-Z_]+@[a-zA-Z_]+?\\.[a-zA-Z]{1,3}"))
+        if(parametr.equalsIgnoreCase("[a-zA-Z_]+@[a-zA-Z_]+?\\.[a-zA-Z]{1,3}"))
             System.out.println("EEEEEEEEEEEEEEEEEEEe");
         else
-            System.out.println("NEEEEEEEEEEEEEEEEE");*/
+            System.out.println("NEEEEEEEEEEEEEEEEE");
         user.setEmail(parametr);
         System.out.println("Email : " + user.getEmail());
 
 
-       /* System.out.println("How much phones roles ?");
+        System.out.println("How much phones roles ?");
         int count = 0;
 
         try{
@@ -90,7 +88,7 @@ public class UserServiceImpl implements UserService {
         }
 
         user.setPhones(phones);
-*/
+
 
         System.out.println(user);
 
@@ -99,9 +97,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User changeUser(User u) {
+        Scanner sc = new Scanner(System.in);
 
         int choise  = 0;
         String parametr;
+
         System.out.println("What do you want change");
         System.out.println("1. Name");
         System.out.println("2. Surname");
@@ -110,6 +110,7 @@ public class UserServiceImpl implements UserService {
         System.out.println("5. Roles");
         System.out.println("6. Phones");
 
+        choise = sc.nextInt();
         switch (choise){
 
             case 1 :
