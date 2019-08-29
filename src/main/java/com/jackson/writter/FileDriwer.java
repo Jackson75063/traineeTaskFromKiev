@@ -4,6 +4,7 @@ package com.jackson.writter;
 //import com.alibaba.fastjson.JSON;
 //import com.alibaba.fastjson.JSON;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -17,14 +18,8 @@ public class FileDriwer {
     private File  file = new File("./test.json");
     private ObjectMapper objectMapper = new ObjectMapper(); // jackson
 
-    public static Map<String,User> users;
-    {
-        existedFile(file);
-        System.out.println("STATIC");
-        users = new HashMap<>();
-        users = objectMapper.readValue(existedFile(file), Map.class);
-    }
-
+    private Map<String,User> users = objectMapper.readValue(file, new TypeReference<Map<String, User>>() {
+    });
 
 
     public void writeToFile(User u)  {
@@ -33,8 +28,8 @@ public class FileDriwer {
             existedFile(file);
 
             // if file is empty
-            if(file.length() != 0)
-                users = objectMapper.readValue(file, Map.class);
+           /* if(file.length() != 0)
+              */
 
 //            objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // for good json view
             users.put(u.getEmail(), u);
@@ -65,12 +60,20 @@ public class FileDriwer {
         this.file = file;
     }
 
-    public Map getUsers() {
+    public ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
+
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    public Map<String, User> getUsers() {
         return users;
     }
 
     public void setUsers(Map<String, User> users) {
-        FileDriwer.users = users;
+        this.users = users;
     }
 
     //if file is not exist -

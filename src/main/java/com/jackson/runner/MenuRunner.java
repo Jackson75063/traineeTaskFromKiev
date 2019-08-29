@@ -4,34 +4,31 @@ import com.jackson.model.User;
 import com.jackson.service.UserService;
 import com.jackson.service.UserServiceImpl;
 import com.jackson.writter.FileDriwer;
-
-import java.io.*;
+import java.io.IOException;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
-public class MenuRunner {
-
-    private boolean isAlive = true;
+class MenuRunner {
 
     private UserService userService = new UserServiceImpl();
-
     private FileDriwer fileDriwer = new FileDriwer();
 
-    public MenuRunner() throws IOException {
-    }
+    private Scanner sc = new Scanner(System.in);
 
-    public void start(){
+    void start(){
 
-        int choose = 0;
 
+        int choose;
+        String mail;
+
+        boolean isAlive = true;
         while (isAlive){
 
             System.out.println("PRESS : ");
             System.out.println("1. Add new user");
-            System.out.println("3. Edit user by mail");
-            System.out.println("4. Delete user by mail");
-            System.out.println("5. Print all users");
-            Scanner sc = new Scanner(System.in);
+            System.out.println("2. Edit user by mail");
+            System.out.println("3. Delete user by mail");
+            System.out.println("4. Print all users");
+            System.out.println("9. Close.");
             choose = sc.nextInt();
 
             switch (choose) {
@@ -40,41 +37,39 @@ public class MenuRunner {
                     System.out.println("CASE 1");
                     User u = userService.addUser();
                     fileDriwer.writeToFile(u);
-//                    fileDriwer.test(u);
-                    break;
-                case 2:
-                    System.out.println("CASE 2");
                     break;
 
-                case 3:
-                    String mail;
+
+
+                case 2:
                     System.out.println("Input user mail for changing ");
                     mail = sc.next();
-                    User user = (User) FileDriwer.users.get(mail);
-                    userService.changeUser(user);
-                    FileDriwer.users.put(user.getEmail(),user);
+                    User user = fileDriwer.getUsers().get(mail);
+                    User q = userService.changeUser(user);
+                    fileDriwer.getUsers().put(q.getEmail(),q);
+                    fileDriwer.rewriteFile(fileDriwer.getUsers());
+
                     System.out.println("CHANGED USER");
                     break;
 
-                case 4:
+                case 3:
                     System.out.println("Input mail for deleting : ");
                     mail = sc.next();
-                    userService.deleteByEmail(mail);
-                    System.out.println("DELETED");
-                    fileDriwer.rewriteFile(FileDriwer.users);
-                    System.out.println("REWRITED");
-
+                    userService.deleteByEmail(mail,fileDriwer.getUsers());
+                    fileDriwer.rewriteFile(fileDriwer.getUsers());
                     break;
 
-                case 5:
+                case 4:
 
-
-                    if (FileDriwer.users.size() == 0) {
+                    if (fileDriwer.getUsers().size() == 0) {
                         System.out.println("There is no one user if file. Add users before user.");
                     }
 
-                    FileDriwer.users.forEach((k,v) ->System.out.println(k+" : "+v));
-                    System.out.println("PRINTED");
+                    fileDriwer.getUsers().forEach((k,v) ->System.out.println(k+" : "+v));
+                    break;
+
+                case 9:
+                    isAlive = false;
                     break;
 
                 default:
@@ -85,11 +80,9 @@ public class MenuRunner {
     }
 
 
-    public boolean isAlive() {
-        return isAlive;
+    MenuRunner() throws IOException {
     }
 
-    public void setAlive(boolean alive) {
-        isAlive = alive;
-    }
+
+
 }

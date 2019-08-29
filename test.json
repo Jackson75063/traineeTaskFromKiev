@@ -1,16 +1,9 @@
 {
-  "q" : {
-    "name" : "q",
-    "surname" : "q",
-    "email" : "q",
+  "kek@kek.ru" : {
+    "name" : "bolik",
+    "surname" : "lol",
+    "email" : "kek@kek.ru",
     "roles" : [ "ADMIN" ],
-    "phones" : [ "1" ]
-  },
-  "ww" : {
-    "name" : "w",
-    "surname" : "w",
-    "email" : "ww",
-    "roles" : [ "ADMIN" ],
-    "phones" : [ "44444" ]
+    "phones" : [ "380979896111" ]
   }
 }
